@@ -1,3 +1,4 @@
+import helpers.FlussonicAPI
 import models.Program
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -14,7 +15,7 @@ import play.api.test.Helpers._
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
 
-println(Program.programTimeToDateTime("20140317050000 +0400"))
+FlussonicAPI.recordingStatus("http://demo.erlyvideo.ru","1395068600","1395167000","euro")
 
 //  "Application" should {
 //
