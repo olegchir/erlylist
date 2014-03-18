@@ -1,7 +1,24 @@
-@(message: String)
+@(programs: List[Program])
 
-@main("Welcome to Play") {
+@main("Erlyvideo List") {
+    <a href="/downloadProgramFileAction">Обновить файл программы</a><br/><br/>
 
-    @play20.welcome(message)
-
+    <table border="1">
+        <tr>
+            <th>start</th>
+            <th>stop</th>
+            <th>channel</th>
+            <th>title</th>
+            <th>category</th>
+        </tr>
+        @for(program <- programs) {
+        <tr>
+            <td>@program.start</td>
+            <td>@program.stop</td>
+            <td>@program.channel</td>
+            <td>@program.title</td>
+            <td>@program.category</td>
+        </tr>
+        }
+    </table>
 }
