@@ -59,5 +59,8 @@ object FlussonicAPI {
     s"$serverURL/$channel/archive-$start-$duration.ts"
   }
 
+  def archiveInF4MAsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
+    s"$serverURL/$channel/archive/$start/$duration/manifest.f4m"
+  }
 
 }

@@ -1,0 +1,14 @@
+@(videoURL: String, serverURL: String,serverChannel: String)
+
+@main("Erlyvideo Player") {
+    <object type="application/x-shockwave-flash" name="video_@serverChannel"
+            data="@serverURL/flu/GrindPlayer.swf"
+            width="640" height="480"
+            id="video_@serverChannel"
+            style="visibility: visible;">
+        <param name="allowScriptAccess" value="always">
+        <param name="allowFullScreen" value="true">
+        <param name="allowNetworking" value="all">
+        <param name="flashvars" value="src=@videoURL&amp;javascriptCallbackFunction=onFluPlayerSmpEvent&amp;autoPlay=true">
+    </object>
+}

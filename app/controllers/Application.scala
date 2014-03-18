@@ -26,4 +26,9 @@ object Application extends Controller {
     Redirect("/")
   }
 
+  def HDSPlayer(from:Long,duration:Long) = Action {
+    val videoURL = FlussonicAPI.archiveInF4MAsURL(serverURL,serverChannel,from,duration)
+    Ok(views.html.hdsplayer(videoURL,serverURL,serverChannel))
+  }
+
 }
