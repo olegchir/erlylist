@@ -15,7 +15,9 @@ import play.api.test.Helpers._
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
 
-FlussonicAPI.recordingStatus("http://demo.erlyvideo.ru","1395068600","1395167000","euro")
+//FlussonicAPI.recordingStatus("http://demo.erlyvideo.ru",1395068600,1395167000,"euro")
+//println(FlussonicAPI.recordingStatus("http://demo.erlyvideo.ru",1395136801,1395146255,"euro"))
+  println(FlussonicAPI.recordingStatus("http://demo.erlyvideo.ru",1395018000,1395624600,"euro"))
 
 //  "Application" should {
 //

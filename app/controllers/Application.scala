@@ -4,12 +4,21 @@ import play.api._
 import play.api.mvc._
 
 import helpers._
+import flussonic_api.FlussonicAPI
 
 object Application extends Controller {
   val channelName = "EuroNews"
+  val serverChannelName = "euro"
+  val serverURL = "http://demo.erlyvideo.ru"
 
   def index = Action {
     val programs = ProgramHelper.loadProagams(channelName)
+
+    programs.foreach(program => {
+      val apiResponse = FlussonicAPI.recordingStatus(serverURL,program.startUnixtime,program.stopUnixtime,serverChannelName)
+      if (apiResponse.ranges.size>0) {program.recorded=true}
+    })
+
     Ok(views.html.index(programs))
   }
 

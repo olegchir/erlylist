@@ -36,9 +36,9 @@ object FlussonicAPI {
   /**
    * [{"stream":"euro","ranges":[{"from":1395129604,"duration":11365}]}]
    */
-  def recordingStatus(serverURL:String, from: String, to:String, channel:String, waitFor:Duration = 10000 seconds):Unit = {
+  def recordingStatus(serverURL:String, from: Long, to:Long, channel:String, waitFor:Duration = 10000 seconds):RecordingStatusResponse = {
     val connectURL = s"$serverURL/flussonic/api/recording_status"
-    val request = WS.url(connectURL).withQueryString(("from",from),("to",to),("streams",channel)).withAuth(credentials.login,credentials.password, Realm.AuthScheme.BASIC)
+    val request = WS.url(connectURL).withQueryString(("from",from.toString),("to",to.toString),("streams",channel)).withAuth(credentials.login,credentials.password, Realm.AuthScheme.BASIC)
     val promise: Future[Response] = request.get()
     val result = Await.result(promise,waitFor)
     val json:JsValue = Json.parse(result.body)(0)

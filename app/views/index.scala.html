@@ -7,17 +7,27 @@
         <tr>
             <th>start</th>
             <th>stop</th>
+            <th>start (unixtime)</th>
+            <th>stop (unixtime)</th>
             <th>channel</th>
             <th>title</th>
             <th>category</th>
+            <th>recorded</th>
         </tr>
         @for(program <- programs) {
         <tr>
+            <td>@program.startDateTime</td>
+            <td>@program.stopDateTime</td>
             <td>@program.startUnixtime</td>
             <td>@program.stopUnixtime</td>
             <td>@program.channel</td>
             <td>@program.title</td>
             <td>@program.category</td>
+            <td
+            @if(program.recorded){
+                style="background-color:green;"
+            }
+            >@program.recorded</td>
         </tr>
         }
     </table>

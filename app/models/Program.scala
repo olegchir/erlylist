@@ -22,7 +22,7 @@ category: String
   val startUnixtime = TimeHelper.fromJodaToUnix(startDateTime)
   val stopUnixtime = TimeHelper.fromJodaToUnix(stopDateTime)
 
-  val recorded = false
+  var recorded = false
 }
 
 object Program {

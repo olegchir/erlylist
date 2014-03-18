@@ -15,5 +15,5 @@ object TimeHelper {
   def fromUnixToJoda(tm: Long) = new DateTime(tm * 1000L)
   def fromUnixToJoda(tm: String) = new DateTime(tm.toLong * 1000L)
 
-  def fromJodaToUnix(tm:DateTime, tz:DateTimeZone = DateTimeZone.UTC) = tm.toDateTime(tz).getMillis()
+  def fromJodaToUnix(tm:DateTime, tz:DateTimeZone = DateTimeZone.UTC) = tm.toDateTime(tz).getMillis()/1000
 }
