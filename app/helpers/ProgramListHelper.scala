@@ -11,6 +11,7 @@ import models.Program
 
 
 object ProgramListHelper{
+  var program = <document></document>
 
   def ensureProgramFileExists(programFileURL: String,programFileZIP: String,programFileXML: String) {
     val xmlFile = new File(programFileXML)
@@ -31,6 +32,8 @@ object ProgramListHelper{
     val zipInputStream = new GZIPInputStream(new FileInputStream(zipFile))
     try {Files.copy(zipInputStream,Paths.get(programFileXML))}
     finally {zipInputStream.close()}
+
+    program = scala.xml.XML.loadFile(programFileXML)
   }
 
   def attributeEquals(name: String, value: String)(node: Node) =
@@ -43,8 +46,6 @@ object ProgramListHelper{
   }
 
   def loadProagams(channelName: String, serverURL: String, serverChannel: String, programFileXML: String) = {
-    val program = scala.xml.XML.loadFile(programFileXML)
-
     val channelId = (program \ "channel" filter channelEquals(channelName)) collectFirst {case n => n.attribute("id") match {case Some(x) => x.toString}} match {
       case Some(chennelNum:String) => chennelNum
       case _ => "-1"
