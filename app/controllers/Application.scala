@@ -16,6 +16,7 @@ object Application extends Controller {
   val serverURL = "http://demo.erlyvideo.ru"
 
   def index = Action {
+    ProgramListHelper.ensureProgramFileExists(ProgramFileURL,ProgramFileZIP,ProgramFileXML)
     val programs = ProgramListHelper.loadProagams(channelName,serverURL,serverChannel,ProgramFileXML)
     Program.markRecordedFast(programs)
     Ok(views.html.index(programs,channelName))

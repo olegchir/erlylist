@@ -12,6 +12,13 @@ import models.Program
 
 object ProgramListHelper{
 
+  def ensureProgramFileExists(programFileURL: String,programFileZIP: String,programFileXML: String) {
+    val xmlFile = new File(programFileXML)
+    if (!xmlFile.exists()) {
+      downloadProgramFile(programFileURL,programFileZIP,programFileXML)
+    }
+  }
+
   def downloadProgramFile(programFileURL: String,programFileZIP: String,programFileXML: String) = {
     val xmlFile = new File(programFileXML)
     val zipFile = new File(programFileZIP)
