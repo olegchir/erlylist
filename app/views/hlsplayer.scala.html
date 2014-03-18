@@ -1,0 +1,10 @@
+@(videoURL: String, serverURL: String,serverChannel: String)
+
+@main("Erlyvideo Player") {
+    <script src='@serverURL/flu/js/swfobject.js'></script>
+    <div id='video' style='width: 853px; height: 480px;'></div>
+    <script >
+        swfobject.embedSWF('@serverURL/flu/StrobeMediaPlayback.swf', 'video', 853, 480, '10.3', 'false',
+                {src : '@videoURL',plugin_hls : "@serverURL/flu/HLSDynamicPlugin.swf", autoPlay : true}, {allowFullScreen : "true", allowNetworking : "all"});
+    </script>
+}

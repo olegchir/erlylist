@@ -32,4 +32,9 @@ object Application extends Controller {
     Ok(views.html.hdsplayer(videoURL,serverURL,serverChannel))
   }
 
+  def HLSPlayer(from:Long,duration:Long) = Action {
+    val videoURL = FlussonicAPI.archiveInM3U8AsURL(serverURL,serverChannel,from,duration)
+    Ok(views.html.hlsplayer(videoURL,serverURL,serverChannel))
+  }
+
 }

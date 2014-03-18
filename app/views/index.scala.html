@@ -27,7 +27,10 @@
                 }
                 >@program.recorded</td>
                 <td><a href="@program.archiveInMP4AsURL">MP4</a> <a href="@program.archiveInTSAsURL">TS</a></td>
-                <td><a href="/HDSPlayer/@program.startUnixtime/@program.lengthInSeconds">online HDS player</a></td>
+                <td>
+                    <a href="/player/HDS/@program.startUnixtime/@program.lengthInSeconds">online HDS player</a><br/>
+                    <a href="/player/HLS/@program.startUnixtime/@program.lengthInSeconds">online HLS player</a>
+                </td>
                 <td>
                     <a href="@program.archiveInF4MAsURL">HDS</a>
                     <a href="@program.archiveInMPEGTSTimeshiftAsURL">MPEG-TS Timeshift</a><br/>
