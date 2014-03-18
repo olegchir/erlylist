@@ -26,6 +26,7 @@ serverChannel: String
   val stopUnixtime = TimeHelper.fromJodaToUnix(stopDateTime)
   val lengthInSeconds = stopUnixtime-startUnixtime
   def archiveInMP4AsURL = FlussonicAPI.archiveInMP4AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
+  def archiveInTSAsURL = FlussonicAPI.archiveInTSAsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
 
   var recorded = false
 }

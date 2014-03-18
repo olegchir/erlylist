@@ -58,5 +58,9 @@ object FlussonicAPI {
     s"$serverURL/$channel/archive-$start-$duration.mp4"
   }
 
+  def archiveInTSAsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
+    s"$serverURL/$channel/archive-$start-$duration.ts"
+  }
+
 
 }
