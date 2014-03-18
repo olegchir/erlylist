@@ -1,4 +1,4 @@
-import helpers.FlussonicAPI
+import flussonic_api.FlussonicAPI
 import models.Program
 import org.specs2.mutable._
 import org.specs2.runner._

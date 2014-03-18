@@ -21,6 +21,8 @@ category: String
   val stopDateTime: DateTime = TimeHelper.programTimeToUTCDateTime(stop)
   val startUnixtime = TimeHelper.fromJodaToUnix(startDateTime)
   val stopUnixtime = TimeHelper.fromJodaToUnix(stopDateTime)
+
+  val recorded = false
 }
 
 object Program {
