@@ -54,5 +54,9 @@ object FlussonicAPI {
   case class RecordingStatusResponse (stream:String, ranges: List[RecordingStatusResponseRange])
   case class RecordingStatusResponseRange(from:Long, duration:Long)
 
+  def archiveInMP4AsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
+    s"$serverURL/$channel/archive-$start-$duration.mp4"
+  }
+
 
 }

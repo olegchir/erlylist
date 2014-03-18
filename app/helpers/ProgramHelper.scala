@@ -40,7 +40,7 @@ object ProgramHelper {
     ((node \ "display-name").text.toString())==channelName
   }
 
-  def loadProagams(channelName: String) = {
+  def loadProagams(channelName: String, serverURL: String, serverChannel: String) = {
     val program = scala.xml.XML.loadFile(ProgramFileXML)
 
     val channelId = (program \ "channel" filter channelEquals(channelName)) collectFirst {case n => n.attribute("id") match {case Some(x) => x.toString}} match {
@@ -55,7 +55,10 @@ object ProgramHelper {
         stop = (n \ "@stop").toString(),
         channel = (n \ "@channel").toString(),
         title = (n \ "title").text.toString(),
-        category = (n \ "category").text.toString())))
+        category = (n \ "category").text.toString(),
+        serverURL = serverURL,
+        serverChannel = serverChannel
+      )))
 
     programs
   }

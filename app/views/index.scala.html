@@ -13,6 +13,7 @@
             <th>title</th>
             <th>category</th>
             <th>recorded</th>
+            <th>download</th>
         </tr>
         @for(program <- programs) {
         <tr>
@@ -28,6 +29,7 @@
                 style="background-color:green;"
             }
             >@program.recorded</td>
+            <td><a href="@program.archiveInMP4AsURL">download MP4</a></td>
         </tr>
         }
     </table>
