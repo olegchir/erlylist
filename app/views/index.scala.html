@@ -1,9 +1,11 @@
-@(programs: List[Program])
+@(programs: List[Program], channelName: String)
 
 @main("Erlyvideo List") {
+<div style="text-align:center;">
+    <h1>TV program and archive for @channelName</h1>
     <a href="/downloadProgramFileAction">Обновить файл программы</a><br/><br/>
 
-    <table border="1">
+    <table border="1" style="margin: 0 auto;">
         <tr>
             <th>duration</th>
             <th>title</th>
@@ -11,6 +13,7 @@
             <th>recorded</th>
             <th>download</th>
             <th>view online</th>
+            <th>other formats</th>
         </tr>
         @for(program <- programs) {
             @if(program.recorded) {
@@ -24,9 +27,16 @@
                 }
                 >@program.recorded</td>
                 <td><a href="@program.archiveInMP4AsURL">MP4</a> <a href="@program.archiveInTSAsURL">TS</a></td>
-                <td><a href="/HDSPlayer/@program.startUnixtime/@program.lengthInSeconds">HDS</a></td>
+                <td><a href="/HDSPlayer/@program.startUnixtime/@program.lengthInSeconds">online HDS player</a></td>
+                <td>
+                    <a href="@program.archiveInF4MAsURL">HDS</a>
+                    <a href="@program.archiveInMPEGTSTimeshiftAsURL">MPEG-TS Timeshift</a><br/>
+                    <a href="@program.archiveInM3U8AsURL">HLS</a>
+                    <a href="@program.archiveInM3U8TimeshiftAsURL">HLS Timeshift</a>
+                </td>
             </tr>
             }
         }
     </table>
+</div>
 }

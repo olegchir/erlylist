@@ -23,6 +23,10 @@ serverChannel: String
   val lengthInSeconds = stopUnixtime-startUnixtime
   def archiveInMP4AsURL = FlussonicAPI.archiveInMP4AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
   def archiveInTSAsURL = FlussonicAPI.archiveInTSAsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
+  def archiveInF4MAsURL = FlussonicAPI.archiveInF4MAsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
+  def archiveInM3U8AsURL = FlussonicAPI.archiveInM3U8AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
+  def archiveInM3U8TimeshiftAsURL = FlussonicAPI.archiveInM3U8TimeshiftAsURL(serverURL,serverChannel,startUnixtime)
+  def archiveInMPEGTSTimeshiftAsURL = FlussonicAPI.archiveInMPEGTSTimeshiftAsURL(serverURL,serverChannel,startUnixtime)
 
   var recorded = false
 }

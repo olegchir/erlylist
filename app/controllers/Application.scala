@@ -18,7 +18,7 @@ object Application extends Controller {
   def index = Action {
     val programs = ProgramListHelper.loadProagams(channelName,serverURL,serverChannel,ProgramFileXML)
     Program.markRecordedFast(programs)
-    Ok(views.html.index(programs))
+    Ok(views.html.index(programs,channelName))
   }
 
   def downloadProgramFileAction = Action {

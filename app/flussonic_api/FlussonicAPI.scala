@@ -51,16 +51,46 @@ object FlussonicAPI {
   case class RecordingStatusResponse (stream:String, ranges: List[RecordingStatusResponseRange])
   case class RecordingStatusResponseRange(from:Long, duration:Long)
 
+  /**
+   * MPEG
+   */
   def archiveInMP4AsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
     s"$serverURL/$channel/archive-$start-$duration.mp4"
   }
 
+  /**
+   * TS
+   */
   def archiveInTSAsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
     s"$serverURL/$channel/archive-$start-$duration.ts"
   }
 
+  /**
+   * HDS
+   */
   def archiveInF4MAsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
     s"$serverURL/$channel/archive/$start/$duration/manifest.f4m"
+  }
+
+  /**
+   * HLS
+   */
+  def archiveInM3U8AsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
+    s"$serverURL/$channel/index-$start-$duration.m3u8"
+  }
+
+  /**
+   * HLS Timeshift
+   */
+  def archiveInM3U8TimeshiftAsURL(serverURL:String, channel:String, start: Long) = {
+    s"$serverURL/$channel/timeshift_abs-$start.m3u8"
+  }
+
+  /**
+   * MPEG-TS Timeshift
+   */
+  def archiveInMPEGTSTimeshiftAsURL(serverURL:String, channel:String, start: Long) = {
+    s"$serverURL/$channel/timeshift_abs/$start"
   }
 
 }
