@@ -5,9 +5,7 @@ import org.joda.time.tz._
 import org.joda.time.format._
 import java.util.Date
 
-/**
- * Created by olegchir on 18.03.14.
- */
+
 object TimeHelper {
   def programTimeToDateTime(tm: String) = DateTimeFormat.forPattern("yyyyMMddHHmmss Z").withOffsetParsed().parseDateTime(tm)
   def programTimeToUTCDateTime(tm: String) = programTimeToDateTime(tm).toDateTime(DateTimeZone.UTC)

@@ -19,9 +19,6 @@ object ApiCredentinals {
   }
 }
 
-/**
- * Created by olegchir on 18.03.14.
- */
 object FlussonicAPI {
   def credentials = ApiCredentinals.get()
 

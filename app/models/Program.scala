@@ -7,10 +7,6 @@ import java.util.Date
 import helpers.TimeHelper
 import flussonic_api.FlussonicAPI
 
-
-/**
- * Created by olegchir on 18.03.14.
- */
 case class Program (
 start: String,
 stop: String,
@@ -32,5 +28,39 @@ serverChannel: String
 }
 
 object Program {
+  def markRecordedFast(sourcePrograms:List[Program]) = {
+    val programs = sourcePrograms.sortBy(_.startUnixtime)
+    if (programs.size>0) {
+      val headElem = programs.head
+      val serverURL = headElem.serverURL
+      val serverChannel = headElem.serverChannel
+      val minUnixtime = programs.head.startUnixtime
+      val maxUnixtime = programs.last.stopUnixtime
+      val recordingStatus = FlussonicAPI.recordingStatus(serverURL,minUnixtime,maxUnixtime,serverChannel)
+      val programsRecorded = programs.filter(program => {
+        recordingStatus.ranges.filter(rng => {
+          val startTime = rng.from
+          val endTime = rng.from + rng.duration
+          (startTime <= program.startUnixtime && endTime >= program.startUnixtime) ||
+            (startTime <= program.stopUnixtime && endTime >= program.stopUnixtime) ||
+            (startTime <= program.startUnixtime && endTime >= program.stopUnixtime) ||
+            (startTime >= program.startUnixtime && endTime <= program.stopUnixtime)
+        }).size>0
+      })
+      programsRecorded.foreach(_.recorded=true)
+    }
+  }
 
+  def markRecordedWithMultipleAPICalls(sourcePrograms:List[Program]) {
+    if (sourcePrograms.size>0) {
+      val headElem = sourcePrograms.head
+      val serverURL = headElem.serverURL
+      val serverChannel = headElem.serverChannel
+
+      sourcePrograms.foreach(program => {
+        val apiResponse = FlussonicAPI.recordingStatus(serverURL,program.startUnixtime,program.stopUnixtime,serverChannel)
+        if (apiResponse.ranges.size>0) {program.recorded=true}
+      })
+    }
+  }
 }

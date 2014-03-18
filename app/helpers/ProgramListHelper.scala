@@ -9,25 +9,20 @@ import java.nio.file._
 import scala.xml._
 import models.Program
 
-/**
- * Created by olegchir on 18.03.14.
- */
-object ProgramHelper {
-  val ProgramFileURL="http://www.teleguide.info/download/new3/xmltv.xml.gz"
-  val ProgramFileZIP=fsh.appendElement(fsh.rootPath,"/xmltv.xml.gz")
-  val ProgramFileXML=fsh.appendElement(fsh.rootPath,"/xmltv.xml")
 
-  def downloadProgramFile = {
-    val xmlFile = new File(ProgramFileXML)
-    val zipFile = new File(ProgramFileZIP)
+object ProgramListHelper{
+
+  def downloadProgramFile(programFileURL: String,programFileZIP: String,programFileXML: String) = {
+    val xmlFile = new File(programFileXML)
+    val zipFile = new File(programFileZIP)
 
     zipFile.delete
     xmlFile.delete
 
-    new URL(ProgramFileURL) #> new File(ProgramFileZIP) !!
+    new URL(programFileURL) #> new File(programFileZIP) !!
 
     val zipInputStream = new GZIPInputStream(new FileInputStream(zipFile))
-    try {Files.copy(zipInputStream,Paths.get(ProgramFileXML))}
+    try {Files.copy(zipInputStream,Paths.get(programFileXML))}
     finally {zipInputStream.close()}
   }
 
@@ -40,8 +35,8 @@ object ProgramHelper {
     ((node \ "display-name").text.toString())==channelName
   }
 
-  def loadProagams(channelName: String, serverURL: String, serverChannel: String) = {
-    val program = scala.xml.XML.loadFile(ProgramFileXML)
+  def loadProagams(channelName: String, serverURL: String, serverChannel: String, programFileXML: String) = {
+    val program = scala.xml.XML.loadFile(programFileXML)
 
     val channelId = (program \ "channel" filter channelEquals(channelName)) collectFirst {case n => n.attribute("id") match {case Some(x) => x.toString}} match {
       case Some(chennelNum:String) => chennelNum
