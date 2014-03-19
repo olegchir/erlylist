@@ -3,14 +3,14 @@
 @main("Erlyvideo List") {
 <div style="text-align:center;">
     <h1>TV program and archive for @channelName</h1>
-    <a href="/downloadProgramFileAction">Обновить файл программы</a><br/><br/>
+    <a href="/downloadProgramFileAction">reload program file</a><br/><br/>
 
     <table border="1" style="margin: 0 auto;">
         <tr>
-            <th>duration</th>
+            <th>duration (UTC)</th>
             <th>title</th>
             <th>category</th>
-            <th>recorded</th>
+            <th>recording</th>
             <th>download</th>
             <th>view online</th>
             <th>other formats</th>
@@ -18,30 +18,42 @@
         @for(program <- programs) {
             @if(program.recorded) {
             <tr>
-                <td>@program.startDateTime<br/>@program.stopDateTime</td>
+                <td>Start: @program.startDateTimeForHuman<br/>Finish: @program.stopDateTimeForHuman</td>
                 <td>@program.title</td>
                 <td>@program.category</td>
-                <td
                 @if(program.recorded){
-                    style="background-color:green;"
+                    @if(program.live) {
+                        <td style="background-color:orange;">live</td>
+                    } else {
+                        @if(program.full) {
+                            <td style="background-color:green;">full</td>
+                        } else {
+                            <td style="background-color:yellow;">partial</td>
+                        }
+                    }
                 }
-                >@program.recorded</td>
                 <td><a href="@program.archiveInMP4AsURL">MP4</a> <a href="@program.archiveInTSAsURL">TS</a></td>
                 <td>
+                    @if(!program.live) {
                     <a href="/player/HDS/@program.startUnixtime/@program.lengthInSeconds">HDS</a>
-                    <a href="/player/HDSrewind/@program.startUnixtime">HDS+rewind</a><br/>
                     <a href="/player/HLS/@program.startUnixtime/@program.lengthInSeconds">HLS</a>
-                    <a href="/player/HLSrewind/@program.startUnixtime">HLS+rewind</a><br/>
                     <a href="/player/HLS/mono/@program.startUnixtime/@program.lengthInSeconds">HLS+mono</a>
-                    <a href="/player/HLSrewind/mono/@program.startUnixtime">HLS+mono+rewind</a>
+                    }
+                    @if(program.live) {
+                    Rewind:
+                    <a href="/player/HDSrewind/@program.startUnixtime">HDS</a>
+                    <a href="/player/HLSrewind/@program.startUnixtime">HLS</a>
+                    <a href="/player/HLSrewind/mono/@program.startUnixtime">HLS+mono</a>
+                    }
                 </td>
                 <td>
                     <a href="@program.archiveInF4MAsURL">HDS</a>
-                    <a href="@program.archiveInMPEGTSTimeshiftAsURL">MPEG-TS Timeshift</a><br/>
                     <a href="@program.archiveInM3U8WithoutMonoAsURL">HLS</a>
-                    <a href="@program.archiveInM3U8AbsoluteTimeshiftWithoutMonoAsURL">HLS Absolute Timeshift</a><br/>
-                    <a href="@program.archiveInM3U8WithMonoAsURL">HLS+mono</a>
-                    <a href="@program.archiveInM3U8AbsoluteTimeshiftWithMonoAsURL">HLS+mono Absolute Timeshift</a>
+                    <a href="@program.archiveInM3U8WithMonoAsURL">HLS+mono</a><br/>
+                    Timeshift:
+                    <a href="@program.archiveInMPEGTSTimeshiftAsURL">MPEG-TS</a>
+                    <a href="@program.archiveInM3U8AbsoluteTimeshiftWithoutMonoAsURL">HLS Absolute</a>
+                    <a href="@program.archiveInM3U8AbsoluteTimeshiftWithMonoAsURL">HLS+mono Absolute</a>
                 </td>
             </tr>
             }

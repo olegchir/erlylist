@@ -16,11 +16,18 @@ category: String,
 serverURL: String,
 serverChannel: String
 ) {
+  var recorded = false
+  var live = false
+  var full = false
+
   val startDateTime: DateTime = TimeHelper.programTimeToUTCDateTime(start)
   val stopDateTime: DateTime = TimeHelper.programTimeToUTCDateTime(stop)
   val startUnixtime = TimeHelper.fromJodaToUnix(startDateTime)
   val stopUnixtime = TimeHelper.fromJodaToUnix(stopDateTime)
   val lengthInSeconds = stopUnixtime-startUnixtime
+  val startDateTimeForHuman: String = TimeHelper.jodaForHuman(startDateTime)
+  val stopDateTimeForHuman: String = TimeHelper.jodaForHuman(stopDateTime)
+
   def archiveInMP4AsURL = FlussonicAPI.archiveInMP4AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
   def archiveInTSAsURL = FlussonicAPI.archiveInTSAsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
   def archiveInF4MAsURL = FlussonicAPI.archiveInF4MAsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
@@ -33,8 +40,6 @@ serverChannel: String
   def archiveInM3U8TimeshiftWithRewindWithoutRedirectWithMonoAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL,serverChannel,startUnixtime,mono=true)
   def archiveInM3U8TimeshiftWithRewindWithoutRedirectWithoutMonoAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL,serverChannel,startUnixtime,mono=false)
   def archiveInM4UTimeshiftWithRewindAsURL = FlussonicAPI.archiveInF4MTimeshiftWithRewindAsURL(serverURL,serverChannel,startUnixtime)
-
-  var recorded = false
 }
 
 object Program {
@@ -47,6 +52,7 @@ object Program {
       val minUnixtime = programs.head.startUnixtime
       val maxUnixtime = programs.last.stopUnixtime
       val recordingStatus = FlussonicAPI.recordingStatus(serverURL,minUnixtime,maxUnixtime,serverChannel)
+
       val programsRecorded = programs.filter(program => {
         recordingStatus.ranges.filter(rng => {
           val startTime = rng.from
@@ -57,7 +63,27 @@ object Program {
             (startTime >= program.startUnixtime && endTime <= program.stopUnixtime)
         }).size>0
       })
+
       programsRecorded.foreach(_.recorded=true)
+
+      val programsFull = programs.filter(program => {
+        recordingStatus.ranges.filter(rng => {
+          val startTime = rng.from
+          val endTime = rng.from + rng.duration
+          (startTime <= program.startUnixtime && endTime >= program.stopUnixtime)
+        }).size>0
+      })
+
+      programsFull.foreach(_.full=true)
+
+      val programsLive = programs.filter(program => {
+        recordingStatus.ranges.filter(rng => {
+          val nowTime = TimeHelper.fromJodaToUnix(new DateTime)
+          (nowTime >= program.startUnixtime && nowTime <= program.stopUnixtime)
+        }).size>0
+      })
+
+      programsLive.foreach(_.live=true)
     }
   }
 
