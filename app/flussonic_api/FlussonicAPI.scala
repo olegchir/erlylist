@@ -75,15 +75,17 @@ object FlussonicAPI {
   /**
    * HLS
    */
-  def archiveInM3U8AsURL(serverURL:String, channel:String, start: Long, duration: Long) = {
-    s"$serverURL/$channel/index-$start-$duration.m3u8"
+  def archiveInM3U8AsURL(serverURL:String, channel:String, start: Long, duration: Long, mono:Boolean=false) = {
+    val prefix = if (mono) {"mono"} else {"index"}
+    s"$serverURL/$channel/$prefix-$start-$duration.m3u8"
   }
 
   /**
    * HLS Timeshift
    */
-  def archiveInM3U8TimeshiftAsURL(serverURL:String, channel:String, start: Long) = {
-    s"$serverURL/$channel/timeshift_abs-$start.m3u8"
+  def archiveInM3U8AbsoluteTimeshiftAsURL(serverURL:String, channel:String, start: Long, mono:Boolean=false) = {
+    val postfix = if (mono) {"_mono"} else {""}
+    s"$serverURL/$channel/timeshift_abs$postfix-$start.m3u8"
   }
 
   /**
@@ -103,8 +105,9 @@ object FlussonicAPI {
   /**
    * HLS Timeshift with Rewind Wuthout Redirect
    */
-  def archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL:String, channel:String, start: Long) = {
-    s"$serverURL/$channel/index-$start-now.m3u8"
+  def archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL:String, channel:String, start: Long, mono:Boolean=false) = {
+    val prefix = if (mono) {"mono"} else {"index"}
+    s"$serverURL/$channel/$prefix-$start-now.m3u8"
   }
 
   /**

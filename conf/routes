@@ -6,9 +6,11 @@
 GET     /                           controllers.Application.index
 GET     /downloadProgramFileAction  controllers.Application.downloadProgramFileAction
 GET     /player/HDS/:from/:duration  controllers.Application.HDSPlayer(from:Long,duration:Long)
-GET     /player/HLS/:from/:duration  controllers.Application.HLSPlayer(from:Long,duration:Long)
 GET     /player/HDSrewind/:from  controllers.Application.HDSRewindPlayer(from:Long)
-GET     /player/HLSrewind/:from  controllers.Application.HLSRewindPlayer(from:Long)
+GET     /player/HLS/:from/:duration  controllers.Application.HLSPlayer(from:Long,duration:Long,mono:Boolean?=false)
+GET     /player/HLSrewind/:from  controllers.Application.HLSRewindPlayer(from:Long,mono:Boolean?=false)
+GET     /player/HLS/mono/:from/:duration  controllers.Application.HLSPlayer(from:Long,duration:Long,mono:Boolean?=true)
+GET     /player/HLSrewind/mono/:from  controllers.Application.HLSRewindPlayer(from:Long,mono:Boolean?=true)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -24,11 +24,14 @@ serverChannel: String
   def archiveInMP4AsURL = FlussonicAPI.archiveInMP4AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
   def archiveInTSAsURL = FlussonicAPI.archiveInTSAsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
   def archiveInF4MAsURL = FlussonicAPI.archiveInF4MAsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
-  def archiveInM3U8AsURL = FlussonicAPI.archiveInM3U8AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
-  def archiveInM3U8TimeshiftAsURL = FlussonicAPI.archiveInM3U8TimeshiftAsURL(serverURL,serverChannel,startUnixtime)
+  def archiveInM3U8WithoutMonoAsURL = FlussonicAPI.archiveInM3U8AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds,mono=false)
+  def archiveInM3U8WithMonoAsURL = FlussonicAPI.archiveInM3U8AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds,mono=true)
+  def archiveInM3U8AbsoluteTimeshiftWithoutMonoAsURL = FlussonicAPI.archiveInM3U8AbsoluteTimeshiftAsURL(serverURL,serverChannel,startUnixtime,mono=false)
+  def archiveInM3U8AbsoluteTimeshiftWithMonoAsURL = FlussonicAPI.archiveInM3U8AbsoluteTimeshiftAsURL(serverURL,serverChannel,startUnixtime,mono=true)
   def archiveInMPEGTSTimeshiftAsURL = FlussonicAPI.archiveInMPEGTSTimeshiftAsURL(serverURL,serverChannel,startUnixtime)
   def archiveInM3U8TimeshiftWithRewindAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindAsURL(serverURL,serverChannel,startUnixtime)
-  def archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL,serverChannel,startUnixtime)
+  def archiveInM3U8TimeshiftWithRewindWithoutRedirectWithMonoAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL,serverChannel,startUnixtime,mono=true)
+  def archiveInM3U8TimeshiftWithRewindWithoutRedirectWithoutMonoAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL,serverChannel,startUnixtime,mono=false)
   def archiveInM4UTimeshiftWithRewindAsURL = FlussonicAPI.archiveInF4MTimeshiftWithRewindAsURL(serverURL,serverChannel,startUnixtime)
 
   var recorded = false

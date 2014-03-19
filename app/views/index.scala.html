@@ -31,13 +31,17 @@
                     <a href="/player/HDS/@program.startUnixtime/@program.lengthInSeconds">HDS</a>
                     <a href="/player/HDSrewind/@program.startUnixtime">HDS+rewind</a><br/>
                     <a href="/player/HLS/@program.startUnixtime/@program.lengthInSeconds">HLS</a>
-                    <a href="/player/HLSrewind/@program.startUnixtime">HLS+rewind</a>
+                    <a href="/player/HLSrewind/@program.startUnixtime">HLS+rewind</a><br/>
+                    <a href="/player/HLS/mono/@program.startUnixtime/@program.lengthInSeconds">HLS+mono</a>
+                    <a href="/player/HLSrewind/mono/@program.startUnixtime">HLS+mono+rewind</a>
                 </td>
                 <td>
                     <a href="@program.archiveInF4MAsURL">HDS</a>
                     <a href="@program.archiveInMPEGTSTimeshiftAsURL">MPEG-TS Timeshift</a><br/>
-                    <a href="@program.archiveInM3U8AsURL">HLS</a>
-                    <a href="@program.archiveInM3U8TimeshiftAsURL">HLS Timeshift</a>
+                    <a href="@program.archiveInM3U8WithoutMonoAsURL">HLS</a>
+                    <a href="@program.archiveInM3U8AbsoluteTimeshiftWithoutMonoAsURL">HLS Absolute Timeshift</a><br/>
+                    <a href="@program.archiveInM3U8WithMonoAsURL">HLS+mono</a>
+                    <a href="@program.archiveInM3U8AbsoluteTimeshiftWithMonoAsURL">HLS+mono Absolute Timeshift</a>
                 </td>
             </tr>
             }
