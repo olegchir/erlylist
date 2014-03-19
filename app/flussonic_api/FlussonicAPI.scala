@@ -93,4 +93,25 @@ object FlussonicAPI {
     s"$serverURL/$channel/timeshift_abs/$start"
   }
 
+  /**
+   * HLS Timeshift with Rewind
+   */
+  def archiveInM3U8TimeshiftWithRewindAsURL(serverURL:String, channel:String, start: Long) = {
+    s"$serverURL/$channel/archive/$start/now/index.m3u8"
+  }
+
+  /**
+   * HLS Timeshift with Rewind Wuthout Redirect
+   */
+  def archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL:String, channel:String, start: Long) = {
+    s"$serverURL/$channel/index-$start-now.m3u8"
+  }
+
+  /**
+   * HDS Timeshift with Rewind
+   */
+  def archiveInF4MTimeshiftWithRewindAsURL(serverURL:String, channel:String, start: Long) = {
+    s"$serverURL/$channel/archive/$start/now/manifest.f4m"
+  }
+
 }

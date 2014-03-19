@@ -27,6 +27,9 @@ serverChannel: String
   def archiveInM3U8AsURL = FlussonicAPI.archiveInM3U8AsURL(serverURL,serverChannel,startUnixtime,lengthInSeconds)
   def archiveInM3U8TimeshiftAsURL = FlussonicAPI.archiveInM3U8TimeshiftAsURL(serverURL,serverChannel,startUnixtime)
   def archiveInMPEGTSTimeshiftAsURL = FlussonicAPI.archiveInMPEGTSTimeshiftAsURL(serverURL,serverChannel,startUnixtime)
+  def archiveInM3U8TimeshiftWithRewindAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindAsURL(serverURL,serverChannel,startUnixtime)
+  def archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL,serverChannel,startUnixtime)
+  def archiveInM4UTimeshiftWithRewindAsURL = FlussonicAPI.archiveInF4MTimeshiftWithRewindAsURL(serverURL,serverChannel,startUnixtime)
 
   var recorded = false
 }

@@ -37,4 +37,14 @@ object Application extends Controller {
     Ok(views.html.hlsplayer(videoURL,serverURL,serverChannel))
   }
 
+  def HDSRewindPlayer(from:Long) = Action {
+    val videoURL = FlussonicAPI.archiveInF4MTimeshiftWithRewindAsURL(serverURL,serverChannel,from)
+    Ok(views.html.hdsplayer(videoURL,serverURL,serverChannel))
+  }
+
+  def HLSRewindPlayer(from:Long) = Action {
+    val videoURL = FlussonicAPI.archiveInM3U8TimeshiftWithRewindWithoutRedirectAsURL(serverURL,serverChannel,from)
+    Ok(views.html.hlsplayer(videoURL,serverURL,serverChannel))
+  }
+
 }
